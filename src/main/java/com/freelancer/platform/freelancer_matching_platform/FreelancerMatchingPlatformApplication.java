@@ -1,4 +1,4 @@
-package com.javabackendakademisi.freelancerMatchingPlatform;
+package com.freelancer.platform.freelancer_matching_platform;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
