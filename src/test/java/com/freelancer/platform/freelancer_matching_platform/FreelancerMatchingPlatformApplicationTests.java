@@ -1,4 +1,4 @@
-package com.javabackendakademisi.freelancerMatchingPlatform;
+package com.freelancer.platform.freelancer_matching_platform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

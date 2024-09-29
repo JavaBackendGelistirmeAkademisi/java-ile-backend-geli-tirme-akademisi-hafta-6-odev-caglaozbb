@@ -1,34 +1,101 @@
-**Ödev Konusu: Freelancer Matching Platform Geliştirme**
+# Freelancer Matching Platform
 
-Bir Freelancer Matching Platform (Serbest Çalışan Eşleştirme Platformu) geliştirin. Bu platformda işverenler projeler oluşturabilir, freelancer'lar bu projelere teklif verebilir. Uygulama, kullanıcıların proje ve teklif yönetimini kolaylaştırırken aynı zamanda güvenilir ve hatasız bir deneyim sunmalıdır. Bu proje sayesinde öğrendiklerinizi uygulayarak kapsamlı bir backend sistemi geliştireceksiniz.
+Freelancer Matching Platform, işverenlerin projeler oluşturup freelancerların teklif vermesine olanak tanıyan bir sistemdir. Bu proje, Spring Boot kullanılarak geliştirilmiş ve PostgreSQL veritabanı ile entegre edilmiştir. 
 
-**Projenin Gereksinimleri:**
+## Özellikler
 
-1.  **Veritabanı Tasarımı ve JDBC Bağlantısı:**
+- **Kullanıcı Yönetimi**: İşverenler ve freelancerlar için kullanıcı kaydı ve giriş.
+- **Proje Yönetimi**: İşverenler projelerini oluşturabilir ve yönetebilir.
+- **Teklif Yönetimi**: Freelancerlar projelere teklif verebilir.
+- **Ödeme Sistemi**: Ödemelerin durumu takip edilebilir.
 
--   RDBMS (MySQL, PostgreSQL) veya NoSQL (MongoDB) veritabanı kullanarak bir veri modeli oluşturun. Bu modelde kullanıcılar (freelancer ve işveren), projeler, teklifler ve ödeme bilgileri gibi tablolar yer almalıdır.
--   Java ile JDBC bağlantısını kurun ve veritabanı üzerinde gerekli tabloları oluşturun.
--   Kullanıcı, proje ve teklif CRUD işlemleri için PreparedStatement ve CallableStatement kullanın.
+## Teknolojiler
 
-3.  **Hata Yönetimi ve Transaction Yönetimi:**
+- **Backend**: Java, Spring Boot
+- **Veritabanı**: PostgreSQL
+- **API Dokümantasyonu**: Swagger
+- **Docker**: Uygulamanın konteynerleştirilmesi
 
--   Kullanıcı işlemleri sırasında oluşabilecek hataları yönetin. Örneğin, negatif teklif tutarları veya eksik proje açıklamaları gibi durumları kontrol edin ve bu hataları kullanıcılara uygun mesajlarla iletin.
--   Transaction yönetimi kullanarak, örneğin bir proje için teklif verildiğinde işlem bütünlüğünü sağlayın. Teklif verirken freelancer'ın bakiyesinin düşmesi ve işlemin sorunsuz tamamlanması sağlanmalıdır.
+## Kurulum
 
-5.  **RESTful API Geliştirme:**
+### Gereksinimler
 
--   Spring Boot kullanarak bir RESTful API oluşturun. Bu API, kullanıcıların proje oluşturması, projelere teklif vermesi ve teklifleri görüntülemesi için gerekli işlemleri sağlamalıdır.
--   API üzerinden projelerin listelenmesi, tekliflerin yönetilmesi ve kullanıcı işlemlerinin yapılması sağlanmalıdır.
+- Java 17 veya üstü
+- Maven
+- Docker (isteğe bağlı)
 
-7.  **Uygulama Testi ve Dokümantasyon:**
+### Adımlar
 
--   Geliştirdiğiniz API'yi test etmek için Postman veya Swagger kullanarak tüm endpoint'lerin doğru çalıştığını kontrol edin.
--   Projenin kurulumunu, kullanılan endpoint'leri ve test sonuçlarını içeren bir dokümantasyon oluşturun.
+1. Projeyi klonlayın:
+    ```bash
+    git clone https://github.com/kullanici_adiniz/freelancer-matching-platform.git
+    ```
 
-**Teslim Edilecekler:**
+2. Proje dizinine gidin:
+    ```bash
+    cd freelancer-matching-platform
+    ```
 
--   Çalışan bir Spring Boot uygulaması
--   Veritabanı bağlantısı ve CRUD işlemlerini içeren Java kodları
--   Hata ve transaction yönetimini içeren örnek kod blokları
--   Postman veya Swagger ile test edilebilir durumda olması
--   Uygulamayı dockerize etme (opsiyonel)
+3. Bağımlılıkları yükleyin:
+    ```bash
+    mvn install
+    ```
+
+4. Uygulamayı başlatın:
+    ```bash
+    mvn spring-boot:run
+    ```
+
+### Docker ile Kurulum
+
+Eğer Docker kullanıyorsanız, şu adımları izleyebilirsiniz:
+
+1. Docker imajını oluşturun:
+    ```bash
+    docker build -t freelancer-matching-platform .
+    ```
+
+2. PostgreSQL veritabanını başlatın:
+    ```bash
+    docker run --name postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+    ```
+
+3. Uygulamayı başlatın:
+    ```bash
+    docker run --name app --link postgres -p 8080:8080 freelancer-matching-platform
+    ```
+
+## API Kullanımı
+
+### Kullanıcı Oluşturma
+
+- **Endpoint**: `POST /api/users`
+- **Request Body**:
+    ```json
+    {
+      "name": "cagla",
+      "email": "cagla@gmail.com",
+      "password": "1caglacagla",
+      "userType": "EMPLOYER"
+    }
+    ```
+
+### Proje Oluşturma
+
+- **Endpoint**: `POST /api/projects`
+- **Request Body**:
+    ```json
+    {
+      "title": "Proje Başlığı",
+      "description": "Proje Açıklaması",
+      "employer": "employer_id"
+    }
+    ```
+
+## Katkıda Bulunanlar
+
+- Cagla Ozbaba
+
+## Lisans
+
+Bu proje MIT lisansı ile lisanslanmıştır.
